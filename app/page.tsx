@@ -119,7 +119,7 @@ export default function Home() {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="text-xl md:text-3xl max-w-2xl font-sans font-bold text-ink/80 tracking-tight leading-snug"
             >
-              Hello, I&apos;m Slayr. I build modern, sleek, and functional software. 
+              Hello, I&apos;m Rishi Mihir Popat. I specialize in Data Science and AI. 
               Welcome to my personal portfolio and digital playground.
             </motion.p>
             <motion.div 

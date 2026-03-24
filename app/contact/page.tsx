@@ -21,7 +21,7 @@ export default function Contact() {
         </p>
 
         <motion.a
-          href="mailto:slayr@gmail.com"
+          href="mailto:rishipopat@outlook.com"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
@@ -32,12 +32,12 @@ export default function Contact() {
           </div>
           <div className="min-w-0 flex-1">
             <h3 className="text-sm font-mono uppercase tracking-widest opacity-60 mb-1">Email</h3>
-            <p className="text-xl md:text-2xl font-bold break-all">slayr@gmail.com</p>
+            <p className="text-xl md:text-2xl font-bold break-all">rishipopat@outlook.com</p>
           </div>
         </motion.a>
 
         <motion.a
-          href="tel:+1234567890"
+          href="tel:+919650422634"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.1 }}
@@ -48,7 +48,7 @@ export default function Contact() {
           </div>
           <div className="min-w-0 flex-1">
             <h3 className="text-sm font-mono uppercase tracking-widest opacity-60 mb-1">Phone</h3>
-            <p className="text-xl md:text-2xl font-bold break-all">+1 (234) 567-890</p>
+            <p className="text-xl md:text-2xl font-bold break-all">+91 9650422634</p>
           </div>
         </motion.a>
       </div>

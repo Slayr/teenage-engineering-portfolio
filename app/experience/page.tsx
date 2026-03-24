@@ -5,22 +5,28 @@ import { Briefcase, Download } from 'lucide-react';
 
 const experiences = [
   {
+    role: "Research Collaborator",
+    company: "Google User Research (Remote)",
+    duration: "Jan 2025 - Present",
+    summary: "Collaborated with Google's user research team to evaluate early-stage app prototypes, providing data-driven feedback.",
+  },
+  {
+    role: "SDE Intern",
+    company: "Stratbeans (Gurugram)",
+    duration: "July 2024 - Dec 2024",
+    summary: "Developed and maintained LMS systems using PHP and Laravel. Implemented critical bug fixes and worked on prototyping updated versions of tech stack using Laravel Integrations with AngularJS and Tailwind CSS.",
+  },
+  {
     role: "Senior Intern",
-    company: "Hop Drones",
-    duration: "Jun 2025 - Present",
-    summary: "Leading development of autonomous drone navigation systems using computer vision and deep learning. Mentoring junior interns and optimizing flight path algorithms.",
+    company: "HopDrones (Gurugram)",
+    duration: "July 2023 - Nov 2023",
+    summary: "Managed a team of interns. Achieved and exceeded a goal of development of autonomous Motion detection and tracking in lightweight drones using YOLO and ByteTrack.",
   },
   {
-    role: "SWE Intern",
-    company: "Stratbeans",
-    duration: "Jan 2024 - May 2025",
-    summary: "Developed scalable backend services using ExpressJS and Node.js. Improved database query performance by 40% and implemented robust REST APIs for enterprise clients.",
-  },
-  {
-    role: "Research Assistant",
-    company: "University AI Lab",
-    duration: "Aug 2023 - Dec 2023",
-    summary: "Assisted in biostatistics research, applying machine learning models to predict patient outcomes. Co-authored a paper published in a peer-reviewed journal.",
+    role: "Campus Ambassador",
+    company: "Gemini Solutions International (Remote)",
+    duration: "2022 - May 2025",
+    summary: "Championed the company’s presence on campus through targeted outreach and events.",
   }
 ];
 

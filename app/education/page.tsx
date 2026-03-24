@@ -1,29 +1,49 @@
 'use client';
 
 import { motion } from 'motion/react';
-import { GraduationCap } from 'lucide-react';
+import { GraduationCap, Award, Users } from 'lucide-react';
 
 const education = [
   {
-    degree: "M.Sc. Data Science",
-    school: "University of Technology",
+    degree: "M.Sc in Data Science",
+    school: "Manipal Academy of Higher Education – PSPH",
     status: "In Progress",
-    duration: "2025 - 2027",
-    details: "Specializing in deep learning and advanced statistical modeling.",
+    duration: "July 2025 - Present",
+    details: "Manipal, Karnataka.",
   },
   {
-    degree: "B.Tech Artificial Intelligence",
-    school: "Institute of Engineering",
+    degree: "B.Tech in Computer Science Engineering",
+    school: "The NorthCap University",
     status: "Completed",
-    duration: "2021 - 2025",
-    details: "Graduated with honors. Thesis on autonomous drone navigation using computer vision.",
+    duration: "2021 - May 2025",
+    details: "Specialization in AI & ML. Gurugram, Haryana.",
   },
   {
-    degree: "IB Diploma",
-    school: "International School",
+    degree: "IB Diploma Programme",
+    school: "Pathways World School",
     status: "Completed",
-    duration: "2019 - 2021",
-    details: "Higher Level Mathematics, Physics, and Computer Science.",
+    duration: "2011 - 2021",
+    details: "Gurugram, Haryana.",
+  }
+];
+
+const certifications = [
+  "Harvard University: CS50X (Intro to Computer Science) & CS50AI (Intro to AI with Python)",
+  "AWS: Academy Cloud Foundations & Machine Learning Foundations",
+  "World Quant University: Applied Data Science Lab",
+  "Arizona State University: Certificate of Innovation",
+];
+
+const leadership = [
+  {
+    title: "President, Media Relations Club",
+    duration: "2021 - 2023",
+    details: "Orchestrated social media campaigns and university marketing collaborations."
+  },
+  {
+    title: "Secretary, OPTICA",
+    duration: "2021 - 2023",
+    details: "Managed administrative tasks and fostered a collaborative research environment."
   }
 ];
 
@@ -48,7 +68,7 @@ export default function Education() {
             className="te-card p-8 flex flex-col h-full relative overflow-hidden group"
           >
             <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-              <GraduationCap size={64} />
+               <GraduationCap size={64} />
             </div>
             
             <div className="z-10 flex-1">
@@ -67,6 +87,52 @@ export default function Education() {
             </div>
           </motion.div>
         ))}
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 pt-12 te-border-t">
+        <div className="space-y-8">
+          <h2 className="text-3xl te-heading flex items-center gap-3">
+            <Award size={28} className="text-accent" />
+            Certifications
+          </h2>
+          <div className="space-y-4">
+            {certifications.map((cert, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.4, delay: i * 0.1 }}
+                className="te-card p-6 border-l-4 border-l-accent"
+              >
+                <p className="font-mono text-sm">{cert}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        <div className="space-y-8">
+          <h2 className="text-3xl te-heading flex items-center gap-3">
+            <Users size={28} className="text-accent" />
+            Leadership
+          </h2>
+          <div className="space-y-6">
+            {leadership.map((item, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.4, delay: i * 0.1 }}
+                className="te-card p-6"
+              >
+                <div className="flex justify-between items-start gap-4 mb-2 cursor-default">
+                  <h3 className="font-bold text-lg">{item.title}</h3>
+                  <span className="te-pill bg-ink text-bg shrink-0">{item.duration}</span>
+                </div>
+                <p className="text-ink/80 text-sm leading-relaxed">{item.details}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );

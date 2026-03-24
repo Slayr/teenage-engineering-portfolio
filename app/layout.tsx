@@ -19,14 +19,14 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Slayr | Personal Portfolio',
-    template: '%s | Slayr',
+    default: 'Rishi Mihir Popat | Personal Portfolio',
+    template: '%s | Rishi Mihir Popat',
   },
   description: 'A modern, sleek personal portfolio website showcasing projects, skills, experience, and photography.',
-  keywords: ['portfolio', 'developer', 'software engineer', 'projects', 'blog', 'photography'],
-  authors: [{ name: 'Slayr' }],
+  keywords: ['portfolio', 'data science', 'ai', 'developer', 'machine learning', 'projects'],
+  authors: [{ name: 'Rishi Mihir Popat' }],
   openGraph: {
-    title: 'Slayr | Personal Portfolio',
+    title: 'Rishi Mihir Popat | Personal Portfolio',
     description: 'A modern, sleek personal portfolio website showcasing projects, skills, experience, and photography.',
     type: 'website',
     locale: 'en_US',
