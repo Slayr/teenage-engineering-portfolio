@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'motion/react';
-import { Mail, Phone, Send } from 'lucide-react';
+import { Mail, Phone, MapPin, Send } from 'lucide-react';
 
 export default function Contact() {
   return (
@@ -51,6 +51,21 @@ export default function Contact() {
             <p className="text-xl md:text-2xl font-bold break-all">+91 9650422634</p>
           </div>
         </motion.a>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: 0.2 }}
+          className="group flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-6 p-6 te-card text-center sm:text-left"
+        >
+          <div className="p-4 rounded-full bg-ink text-bg shrink-0">
+            <MapPin size={24} />
+          </div>
+          <div className="min-w-0 flex-1">
+            <h3 className="text-sm font-mono uppercase tracking-widest opacity-60 mb-1">Location</h3>
+            <p className="text-xl md:text-2xl font-bold break-all">Manipal, Karnataka</p>
+          </div>
+        </motion.div>
       </div>
     </div>
   );

@@ -23,8 +23,9 @@ interface Link {
 const cvCategories = [
   { id: 'cat-languages', label: 'Languages' },
   { id: 'cat-frameworks', label: 'Frameworks & Web' },
-  { id: 'cat-ai', label: 'AI & Machine Learning' },
-  { id: 'cat-tools', label: 'Tools & Cloud' }
+  { id: 'cat-ai', label: 'AI & ML' },
+  { id: 'cat-tools', label: 'Tools & Cloud' },
+  { id: 'cat-spoken', label: 'Spoken Languages' }
 ];
 
 const cvSkills = [
@@ -33,11 +34,12 @@ const cvSkills = [
   { label: 'SQL', category: 'cat-languages' },
   { label: 'C++', category: 'cat-languages' },
   { label: 'Java', category: 'cat-languages' },
-  { label: 'JavaScript', category: 'cat-languages' },
+  { label: 'Javascript', category: 'cat-languages' },
   { label: 'PHP', category: 'cat-languages' },
   { label: 'Laravel', category: 'cat-frameworks' },
+  { label: 'Backend Dev', category: 'cat-frameworks' },
   { label: 'Web3', category: 'cat-frameworks' },
-  { label: 'PostgreSQL', category: 'cat-frameworks' },
+  { label: 'PostgresQL', category: 'cat-frameworks' },
   { label: 'MongoDB', category: 'cat-frameworks' },
   { label: 'Apache', category: 'cat-frameworks' },
   { label: 'NGINX', category: 'cat-frameworks' },
@@ -45,18 +47,23 @@ const cvSkills = [
   { label: 'Cloudflare', category: 'cat-frameworks' },
   { label: 'CNNs', category: 'cat-ai' },
   { label: 'NLP', category: 'cat-ai' },
+  { label: 'Feature Detection', category: 'cat-ai' },
   { label: 'Deep Learning', category: 'cat-ai' },
   { label: 'Computer Vision', category: 'cat-ai' },
   { label: 'RL', category: 'cat-ai' },
-  { label: 'Transformers', category: 'cat-ai' },
+  { label: 'Transformer Arch', category: 'cat-ai' },
   { label: 'LLM Fine-Tuning', category: 'cat-ai' },
-  { label: 'AWS', category: 'cat-tools' },
+  { label: 'AWS (Cloud Foundations)', category: 'cat-tools' },
   { label: 'Git', category: 'cat-tools' },
   { label: 'Google Suite', category: 'cat-tools' },
-  { label: 'Azure', category: 'cat-tools' },
+  { label: 'Microsoft Azure', category: 'cat-tools' },
   { label: 'Power BI', category: 'cat-tools' },
   { label: 'Tableau', category: 'cat-tools' },
-  { label: 'Excel', category: 'cat-tools' }
+  { label: 'Excel', category: 'cat-tools' },
+  { label: 'English', category: 'cat-spoken' },
+  { label: 'Hindi', category: 'cat-spoken' },
+  { label: 'Spanish', category: 'cat-spoken' },
+  { label: 'French', category: 'cat-spoken' }
 ];
 
 export default function Skills() {
