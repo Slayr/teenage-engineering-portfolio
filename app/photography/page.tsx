@@ -18,19 +18,7 @@ const mockPhotos: Photo[] = [
   { id: '7', url: 'https://picsum.photos/seed/photo7/1000/600', title: 'Nature Textures', description: 'Macro leaf details.', createdAt: new Date(Date.now() - 86400000 * 6).toISOString() },
 ];
 
-const getBentoClass = (index: number) => {
-  const pattern = index % 7;
-  switch (pattern) {
-    case 0: return 'md:col-span-2 md:row-span-2';
-    case 1: return 'md:col-span-1 md:row-span-1';
-    case 2: return 'md:col-span-1 md:row-span-1';
-    case 3: return 'md:col-span-2 md:row-span-1';
-    case 4: return 'md:col-span-1 md:row-span-2';
-    case 5: return 'md:col-span-1 md:row-span-1';
-    case 6: return 'md:col-span-2 md:row-span-1';
-    default: return 'md:col-span-1 md:row-span-1';
-  }
-};
+// Bento classes removed in favor of CSS columns for masonry
 
 export default function Photography() {
   const [photos, setPhotos] = useState<Photo[]>([]);
@@ -94,25 +82,25 @@ export default function Photography() {
           No photos uploaded yet. Use the Admin dashboard to add some.
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 auto-rows-[250px] md:auto-rows-[300px] grid-flow-dense">
+        <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-4 space-y-4">
           {photos.map((photo, i) => (
             <motion.div
               key={photo.id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              className={`relative group cursor-pointer rounded-2xl overflow-hidden te-border bg-ink/5 ${getBentoClass(i)}`}
+              className={`break-inside-avoid relative group cursor-pointer rounded-2xl overflow-hidden te-border bg-ink/5`}
               onClick={() => setSelectedPhoto(photo)}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img 
                 src={photo.url} 
                 alt={photo.title} 
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
                 loading="lazy"
               />
               
-              <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+              <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
                 <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
                   <h3 className="text-bg font-bold text-xl mb-1">{photo.title}</h3>
                   {photo.description && (

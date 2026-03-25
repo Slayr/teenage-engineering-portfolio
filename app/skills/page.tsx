@@ -82,30 +82,35 @@ export default function Skills() {
     const width = containerRef.current?.clientWidth || 800;
     const height = containerRef.current?.clientHeight || 600;
 
-    // Add category nodes
+    // Add category nodes in a cross pattern
     cvCategories.forEach((cat, i) => {
+      const angle = (i / cvCategories.length) * Math.PI * 2;
+      const r = Math.min(width, height) * 0.25;
       initialNodes.push({
         id: cat.id,
         label: cat.label,
         category: cat.id,
         isCategory: true,
-        x: width / 2 + (Math.random() - 0.5) * 400,
-        y: height / 2 + (Math.random() - 0.5) * 300,
+        x: width / 2 + Math.cos(angle) * r,
+        y: height / 2 + Math.sin(angle) * r,
         vx: 0,
         vy: 0
       });
     });
 
-    // Add skill nodes
+    // Add skill nodes loosely around their category
     cvSkills.forEach((skill) => {
+      const catNode = initialNodes.find(n => n.id === skill.category);
       const id = `skill-${skill.label.replace(/\s+/g, '-').toLowerCase()}`;
+      const angle = Math.random() * Math.PI * 2;
+      const r = 100 + Math.random() * 50;
       initialNodes.push({
         id,
         label: skill.label,
         category: skill.category,
         isCategory: false,
-        x: width / 2 + (Math.random() - 0.5) * width * 0.8,
-        y: height / 2 + (Math.random() - 0.5) * height * 0.8,
+        x: (catNode?.x || width / 2) + Math.cos(angle) * r,
+        y: (catNode?.y || height / 2) + Math.sin(angle) * r,
         vx: 0,
         vy: 0
       });
@@ -120,40 +125,46 @@ export default function Skills() {
     let currentNodes = [...initialNodes];
 
     const simulate = () => {
-      const alpha = 0.05; // Learning rate
-      const repulsion = 2000;
-      const attraction = 0.01;
+      const attraction = 0.02;
       
       const newNodes = currentNodes.map(node => ({ ...node }));
 
-      // Forces
       for (let i = 0; i < newNodes.length; i++) {
         for (let j = i + 1; j < newNodes.length; j++) {
           const n1 = newNodes[i];
           const n2 = newNodes[j];
-          const dx = n2.x - n1.x;
-          const dy = n2.y - n1.y;
+          let dx = n2.x - n1.x;
+          let dy = n2.y - n1.y;
+          
+          if (dx === 0 && dy === 0) {
+            dx = (Math.random() - 0.5) * 10;
+            dy = (Math.random() - 0.5) * 10;
+          }
+          
           const distSq = dx * dx + dy * dy;
-          const dist = Math.sqrt(distSq) || 1;
+          const dist = Math.sqrt(distSq);
 
-          // Repulsion (all nodes push each other away)
-          const f = repulsion / distSq;
-          const fx = (dx / dist) * f;
-          const fy = (dy / dist) * f;
+          // Minimum distance constraint (prevents labels overlapping)
+          const minDistance = n1.isCategory || n2.isCategory ? 160 : 110;
+          
+          if (dist < minDistance) {
+            const force = (minDistance - dist) * 0.2;
+            const fx = (dx / dist) * force;
+            const fy = (dy / dist) * force;
+            n1.vx -= fx;
+            n1.vy -= fy;
+            n2.vx += fx;
+            n2.vy += fy;
+          }
 
-          n1.vx -= fx;
-          n1.vy -= fy;
-          n2.vx += fx;
-          n2.vy += fy;
-
-          // Attraction (links pull connected nodes together)
+          // Attraction for linked nodes
           const isLinked = initialLinks.some(l => 
             (l.source === n1.id && l.target === n2.id) || 
             (l.source === n2.id && l.target === n1.id)
           );
 
           if (isLinked) {
-            const pull = (dist - 100) * attraction;
+            const pull = (dist - (n1.isCategory || n2.isCategory ? 160 : 110)) * attraction;
             const px = (dx / dist) * pull;
             const py = (dy / dist) * pull;
             n1.vx += px;
@@ -163,23 +174,24 @@ export default function Skills() {
           }
         }
 
-        // Center gravity
         const n = newNodes[i];
+        
+        // Gentle center gravity
         const cx = width / 2 - n.x;
         const cy = height / 2 - n.y;
-        n.vx += cx * 0.001;
-        n.vy += cy * 0.001;
+        n.vx += cx * (n.isCategory ? 0.005 : 0.001);
+        n.vy += cy * (n.isCategory ? 0.005 : 0.001);
 
-        // Apply velocity with friction
-        n.vx *= 0.9;
-        n.vy *= 0.9;
+        n.vx *= 0.85; // Friction
+        n.vy *= 0.85;
         
         n.x += n.vx;
         n.y += n.vy;
 
-        // Keep bounds
-        n.x = Math.max(50, Math.min(width - 50, n.x));
-        n.y = Math.max(50, Math.min(height - 50, n.y));
+        // Keep bounds padding
+        const padding = 100;
+        n.x = Math.max(padding, Math.min(width - padding, n.x));
+        n.y = Math.max(padding, Math.min(height - padding, n.y));
       }
 
       currentNodes = newNodes;
