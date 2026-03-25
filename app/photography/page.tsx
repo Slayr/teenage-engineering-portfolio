@@ -82,21 +82,21 @@ export default function Photography() {
           No photos uploaded yet. Use the Admin dashboard to add some.
         </div>
       ) : (
-        <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-4 space-y-4">
+        <div className="columns-1 md:columns-2 gap-8">
           {photos.map((photo, i) => (
             <motion.div
               key={photo.id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              className={`break-inside-avoid relative group cursor-pointer rounded-2xl overflow-hidden te-border bg-ink/5`}
+              className="break-inside-avoid mb-8 relative group cursor-pointer rounded-2xl overflow-hidden te-border bg-ink/5"
               onClick={() => setSelectedPhoto(photo)}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img 
                 src={photo.url} 
                 alt={photo.title} 
-                className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
+                className="w-full h-auto block object-contain transition-all duration-500 group-hover:brightness-110"
                 loading="lazy"
               />
               
