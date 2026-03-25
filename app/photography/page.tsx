@@ -20,6 +20,67 @@ const mockPhotos: Photo[] = [
 
 // Bento classes removed in favor of CSS columns for masonry
 
+import { useRef } from 'react';
+import { useScroll, useTransform } from 'framer-motion';
+
+function ParallaxPhotoCard({ photo, i, isUserAdmin, handleDelete, setSelectedPhoto }: any) {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"]
+  });
+  
+  // Parallax shift varies slightly based on odd/even index for staggered feel
+  const yOffset = useTransform(scrollYProgress, [0, 1], [40, -40]);
+
+  return (
+    <motion.div
+      ref={ref}
+      style={{ y: yOffset }}
+      className="break-inside-avoid mb-8 relative group cursor-pointer rounded-2xl overflow-hidden te-border bg-ink/5"
+      onClick={() => setSelectedPhoto(photo)}
+    >
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.6, delay: i * 0.1 }}
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img 
+          src={photo.url} 
+          alt={photo.title} 
+          className="w-full h-auto block object-contain transition-all duration-500 group-hover:brightness-110"
+          loading="lazy"
+        />
+        
+        <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
+          <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+            <h3 className="text-bg font-bold text-xl mb-1">{photo.title}</h3>
+            {photo.description && (
+              <p className="text-bg/80 text-sm line-clamp-2 mb-4">{photo.description}</p>
+            )}
+            <div className="flex items-center justify-between">
+              <span className="text-bg/60 text-xs font-mono uppercase tracking-widest">
+                {new Date(photo.createdAt).toLocaleDateString()}
+              </span>
+              <Maximize2 size={16} className="text-bg" />
+            </div>
+          </div>
+        </div>
+
+        {isUserAdmin && (
+          <button
+            onClick={(e) => handleDelete(e, photo.id)}
+            className="absolute top-4 right-4 p-2 bg-red-500 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-600 z-10 pointer-events-auto"
+          >
+            <Trash2 size={16} />
+          </button>
+        )}
+      </motion.div>
+    </motion.div>
+  );
+}
+
 export default function Photography() {
   const [photos, setPhotos] = useState<Photo[]>([]);
   const [selectedPhoto, setSelectedPhoto] = useState<Photo | null>(null);
@@ -84,46 +145,14 @@ export default function Photography() {
       ) : (
         <div className="columns-1 md:columns-2 gap-8">
           {photos.map((photo, i) => (
-            <motion.div
-              key={photo.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="break-inside-avoid mb-8 relative group cursor-pointer rounded-2xl overflow-hidden te-border bg-ink/5"
-              onClick={() => setSelectedPhoto(photo)}
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img 
-                src={photo.url} 
-                alt={photo.title} 
-                className="w-full h-auto block object-contain transition-all duration-500 group-hover:brightness-110"
-                loading="lazy"
-              />
-              
-              <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
-                <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                  <h3 className="text-bg font-bold text-xl mb-1">{photo.title}</h3>
-                  {photo.description && (
-                    <p className="text-bg/80 text-sm line-clamp-2 mb-4">{photo.description}</p>
-                  )}
-                  <div className="flex items-center justify-between">
-                    <span className="text-bg/60 text-xs font-mono uppercase tracking-widest">
-                      {new Date(photo.createdAt).toLocaleDateString()}
-                    </span>
-                    <Maximize2 size={16} className="text-bg" />
-                  </div>
-                </div>
-              </div>
-
-              {isUserAdmin && (
-                <button
-                  onClick={(e) => handleDelete(e, photo.id)}
-                  className="absolute top-4 right-4 p-2 bg-red-500 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-600 z-10"
-                >
-                  <Trash2 size={16} />
-                </button>
-              )}
-            </motion.div>
+            <ParallaxPhotoCard 
+              key={photo.id} 
+              photo={photo} 
+              i={i} 
+              isUserAdmin={isUserAdmin} 
+              handleDelete={handleDelete} 
+              setSelectedPhoto={setSelectedPhoto} 
+            />
           ))}
         </div>
       )}
