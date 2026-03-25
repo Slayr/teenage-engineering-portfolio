@@ -87,42 +87,42 @@ export default function Home() {
     <div className="space-y-24">
       {/* Hero Section */}
       <section className="flex flex-col gap-8 pt-12 md:pt-20 pb-12">
-        <motion.h1 
+        <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
           className="text-[18vw] md:text-[11vw] font-black leading-[0.85] tracking-tighter uppercase"
         >
-          System<br /><span className="text-accent">Online</span>
+          Rishi<br /><span className="text-accent-orange">Popat</span>
         </motion.h1>
-        
+
         <div className="flex flex-col md:flex-row items-center md:items-start gap-8 md:gap-12 w-full mt-4">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
             className="relative w-32 h-32 md:w-48 md:h-48 rounded-full overflow-hidden te-border bg-ink/5 shrink-0"
           >
-            <Image 
-              src="https://github.com/Slayr.png" 
-              alt="Profile Photo" 
-              fill 
+            <Image
+              src="https://github.com/Slayr.png"
+              alt="Profile Photo"
+              fill
               className="object-cover"
               referrerPolicy="no-referrer"
             />
           </motion.div>
-          
+
           <div className="flex-1 space-y-8 text-center md:text-left">
-            <motion.p 
+            <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
               className="text-xl md:text-3xl max-w-2xl font-sans font-bold text-ink/80 tracking-tight leading-snug"
             >
-              Hello, I&apos;m Rishi Mihir Popat. I specialize in Data Science and AI. 
+              Hello, I&apos;m Rishi Mihir Popat. I specialize in Data Science and AI.
               Welcome to my personal portfolio and digital playground.
             </motion.p>
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
@@ -165,10 +165,10 @@ export default function Home() {
             View All <ArrowRight size={14} />
           </Link>
         </div>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {repos.map((repo, i) => (
-            <motion.div 
+            <motion.div
               key={repo.id}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -206,10 +206,10 @@ export default function Home() {
             Read All <ArrowRight size={14} />
           </Link>
         </div>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {posts.map((post, i) => (
-            <motion.div 
+            <motion.div
               key={post.id}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -235,8 +235,8 @@ export default function Home() {
       </section>
 
       {/* Modals */}
-      <Modal 
-        isOpen={!!selectedRepo} 
+      <Modal
+        isOpen={!!selectedRepo}
         onClose={() => setSelectedRepo(null)}
         title={selectedRepo?.name || 'Project Details'}
       >
@@ -248,9 +248,9 @@ export default function Home() {
               <span className="te-pill">Updated: {format(new Date(selectedRepo.updated_at), 'MMM dd, yyyy')}</span>
             </div>
             <div className="pt-6 te-border-t">
-              <a 
-                href={selectedRepo.html_url} 
-                target="_blank" 
+              <a
+                href={selectedRepo.html_url}
+                target="_blank"
                 rel="noopener noreferrer"
                 className="te-button te-button-accent inline-flex items-center gap-2"
               >
@@ -261,8 +261,8 @@ export default function Home() {
         )}
       </Modal>
 
-      <Modal 
-        isOpen={!!selectedPost} 
+      <Modal
+        isOpen={!!selectedPost}
         onClose={() => setSelectedPost(null)}
         title={selectedPost?.title || 'Blog Post'}
       >

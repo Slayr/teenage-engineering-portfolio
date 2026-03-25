@@ -5,6 +5,7 @@ import { ThemeProvider } from '@/components/ThemeProvider';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { MobileMenu } from '@/components/MobileMenu';
 import { InteractiveBackground } from '@/components/InteractiveBackground';
+import { Home } from 'lucide-react';
 import './globals.css';
 
 const inter = Inter({
@@ -42,8 +43,8 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
           <InteractiveBackground />
           <header className="sticky top-0 z-50 bg-bg/80 backdrop-blur-md te-border-b">
             <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-              <Link href="/" className="font-sans font-bold tracking-tighter text-xl">
-                Portfolio<span className="text-accent">.</span>
+              <Link href="/" className="group flex items-center justify-center p-2 rounded-lg bg-ink/5 hover:bg-ink/10 transition-colors">
+                <Home size={24} className="text-ink group-hover:text-accent-orange transition-colors" />
               </Link>
               <nav className="hidden md:flex items-center gap-8">
                 {[
@@ -80,8 +81,8 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
             <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
               <p className="te-label">© {new Date().getFullYear()} All rights reserved.</p>
               <p className="te-label flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-accent animate-pulse"></span>
-                System Online
+                <span className="w-2 h-2 rounded-full bg-accent-orange animate-pulse"></span>
+                Rishi Mihir Popat
               </p>
             </div>
           </footer>
