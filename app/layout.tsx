@@ -15,6 +15,8 @@ const jetbrainsMono = JetBrains_Mono({
   variable: '--font-mono',
 });
 
+const metadataBase = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+
 export const metadata: Metadata = {
   title: {
     default: 'Rishi Mihir Popat | Personal Portfolio',
@@ -29,7 +31,7 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
   },
-  metadataBase: new URL('https://slayr.github.io'),
+  metadataBase: new URL(metadataBase),
   icons: {
     icon: `${process.env.NEXT_PUBLIC_BASE_PATH || ''}/profile.png`,
     shortcut: `${process.env.NEXT_PUBLIC_BASE_PATH || ''}/profile.png`,
