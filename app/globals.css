@@ -22,6 +22,8 @@
 
 @layer base {
   :root {
+    --font-sans: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --font-mono: "JetBrains Mono", "SFMono-Regular", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
     --bg: #f8fafc; /* Classic Light Bg */
     --ink: #0f172a; /* Slate 900 */
     --line: #cbd5e1; /* Slate 300 */
