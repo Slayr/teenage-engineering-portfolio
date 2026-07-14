@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server';
 
 const DEFAULT_GITHUB_USERNAME = 'RishiMihirPopat';
 const MAX_REPOS = 3;
+export const dynamic = 'force-static';
+export const revalidate = 21600;
 
 type RepoShape = {
   id: number;
@@ -92,7 +94,7 @@ async function fetchPinnedRepos(username: string, token: string): Promise<RepoSh
       query,
       variables: { username, count: MAX_REPOS },
     }),
-    cache: 'no-store',
+    next: { revalidate },
   });
 
   if (!response.ok) {
@@ -121,7 +123,7 @@ async function fetchRecentRepos(username: string): Promise<RepoShape[]> {
       headers: {
         Accept: 'application/vnd.github+json',
       },
-      cache: 'no-store',
+      next: { revalidate },
     }
   );
 
