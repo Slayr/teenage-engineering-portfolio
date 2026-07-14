@@ -8,12 +8,12 @@ export function useGithubRepos() {
   useEffect(() => {
     const fetchLiveGithubRepos = async () => {
       try {
-        const res = await fetch('https://api.github.com/users/Slayr/repos?sort=updated&per_page=10');
+        const res = await fetch('/api/github-repos');
         if (res.ok) {
           const data = await res.json();
-          const filtered = data.filter((r: any) => !r.archived && !r.disabled).slice(0, 3);
-          if (filtered.length > 0) {
-            setRepos(filtered);
+          const liveRepos = Array.isArray(data?.repos) ? data.repos : [];
+          if (liveRepos.length > 0) {
+            setRepos(liveRepos);
           }
         }
       } catch (error) {
